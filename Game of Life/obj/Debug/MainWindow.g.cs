@@ -64,6 +64,14 @@ namespace Game_of_Life {
         #line default
         #line hidden
         
+        
+        #line 38 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Frame _mainFrame;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -120,6 +128,9 @@ namespace Game_of_Life {
             
             #line default
             #line hidden
+            return;
+            case 4:
+            this._mainFrame = ((System.Windows.Controls.Frame)(target));
             return;
             }
             this._contentLoaded = true;

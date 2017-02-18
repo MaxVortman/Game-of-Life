@@ -16,28 +16,13 @@ using System.Windows.Shapes;
 namespace Game_of_Life
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Setting_Page.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Setting_Page : Page
     {
-        public MainWindow()
+        public Setting_Page()
         {
             InitializeComponent();
-        }
-
-        private void Start_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-           //.Navigate(typeof(Setting_Page));
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
