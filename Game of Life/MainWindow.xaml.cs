@@ -22,12 +22,15 @@ namespace Game_of_Life
     {
         public MainWindow()
         {
+            this.WindowHeight = 500;
+            this.WindowWidth = 500;
             InitializeComponent();
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new Uri("C:/Users/Максим Борисович/Documents/Visual Studio 2015/Projects/Game of Life/Game-of-Life/Game of Life/Game_Page.xaml",
+                UriKind.Absolute));
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -38,7 +41,7 @@ namespace Game_of_Life
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            Application.Current.Shutdown();
         }
     }
 }

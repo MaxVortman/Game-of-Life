@@ -15,3 +15,4 @@ C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\G
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\Game of Life.exe
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\Game of Life.pdb
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\Game_Page.baml
