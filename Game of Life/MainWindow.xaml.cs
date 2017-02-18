@@ -18,7 +18,7 @@ namespace Game_of_Life
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         public MainWindow()
         {
@@ -32,7 +32,8 @@ namespace Game_of_Life
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-           //.Navigate(typeof(Setting_Page));
+            this.NavigationService.Navigate(new Uri("C:/Users/Максим Борисович/Documents/Visual Studio 2015/Projects/Game of Life/Game-of-Life/Game of Life/Setting_Page.xaml",
+                UriKind.Absolute));
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

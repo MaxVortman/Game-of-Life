@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Game_of_Life
 {
     /// <summary>
-    /// Логика взаимодействия для Setting_Page.xaml
+    /// Логика взаимодействия для Home_Page.xaml
     /// </summary>
-    public partial class Setting_Page : Page
+    public partial class Home_Page : Window
     {
-        public Setting_Page()
+        public Home_Page()
         {
             InitializeComponent();
         }
