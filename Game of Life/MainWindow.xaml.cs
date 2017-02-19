@@ -20,11 +20,10 @@ namespace Game_of_Life
     /// </summary>
     public partial class MainWindow : Page
     {
-
         public MainWindow()
         {
-            this.WindowHeight = 500;
-            this.WindowWidth = 500;
+            this.WindowHeight = 1000;
+            this.WindowWidth = 1000;
             InitializeComponent();
             
         }

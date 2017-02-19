@@ -5,10 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Game_of_Life"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      Height="1000" Width="1000"
+      WindowHeight="1080" WindowWidth="1920"
       Title="LifeForm">
 
-    <Grid>
+    <Grid x:Name="myGrid">
         
     </Grid>
 </Page>

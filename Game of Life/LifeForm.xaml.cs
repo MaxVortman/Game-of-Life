@@ -25,28 +25,40 @@ namespace Game_of_Life
         private double WIDTH;
         private double HEIGHT;
         Setting_Page settings = new Setting_Page();
+        private Line myLine;
+        private int STEP;
 
-        //public LifeForm(double width, double height)
-        //{
-        //    InitializeComponent();
-        //    CELLS_COUNT = settings.Cells_Count;
-        //    WIDTH = width;
-        //    HEIGHT = height;
-        //}
+
         public LifeForm()
         {
             InitializeComponent();
-            WIDTH = Width;
-            HEIGHT = Height;
+            WIDTH = this.Width;
+            HEIGHT = this.Height;
             CELLS_COUNT = settings.Cells_Count;
+            STEP = (int)(WIDTH / CELLS_COUNT);
+            DrowCells();
         }
 
-        private void Drow()
+        private void DrowCells()
         {
-            for (int i = 0; i < WIDTH; i++)
+            for (int i = 0; i <= CELLS_COUNT; i++)
             {
-
+                DrowLine(i * STEP, i * STEP, 0, CELLS_COUNT * STEP);
+                DrowLine(0, CELLS_COUNT * STEP, i * STEP, i * STEP);
             }
+        }
+
+        private void DrowLine(int x1, int x2, int y1, int y2)
+        {
+                // Add a Line Element
+                myLine = new Line();
+                myLine.Stroke = Brushes.LightSteelBlue;
+                myLine.X1 = x1;
+                myLine.X2 = x2;
+                myLine.Y1 = y1;
+                myLine.Y2 = y2;                
+                myLine.StrokeThickness = 1;
+                myGrid.Children.Add(myLine);
         }
     }
 }

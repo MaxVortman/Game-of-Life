@@ -21,7 +21,7 @@ namespace Game_of_Life
     public partial class Setting_Page : Page
     {
 
-        private int CELLS_COUNT;
+        private static int CELLS_COUNT;
 
         public Setting_Page()
         {
