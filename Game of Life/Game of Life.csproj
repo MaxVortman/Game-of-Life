@@ -55,7 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Game_Page.xaml">
+    <Compile Include="LifeForm.xaml.cs">
+      <DependentUpon>LifeForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Setting_Page.xaml.cs">
+      <DependentUpon>Setting_Page.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LifeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
