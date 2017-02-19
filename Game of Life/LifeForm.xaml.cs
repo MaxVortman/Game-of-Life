@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Game_of_Life
 {
@@ -25,6 +26,7 @@ namespace Game_of_Life
         private double WIDTH;
         private double HEIGHT;
         Setting_Page settings = new Setting_Page();
+        Terrain t;
         private Line myLine;
         private int STEP;
 
@@ -37,6 +39,8 @@ namespace Game_of_Life
             CELLS_COUNT = settings.Cells_Count;
             STEP = (int)(WIDTH / CELLS_COUNT);
             DrowCells();
+            t = new Terrain(CELLS_COUNT);
+            t.TurnFinished += NewTickDrow;         
         }
 
         private void DrowCells()
@@ -58,7 +62,34 @@ namespace Game_of_Life
                 myLine.Y1 = y1;
                 myLine.Y2 = y2;                
                 myLine.StrokeThickness = 1;
-                myGrid.Children.Add(myLine);
+                myCanvas.Children.Add(myLine);
+        }
+
+        private void DrowRectangle(int x1, int y1)
+        {
+            Rectangle drCell = new Rectangle();
+            drCell.Stroke = Brushes.Black;
+            drCell.Fill = Brushes.SkyBlue;
+            drCell.Height = STEP;
+            drCell.Width = STEP;
+            myCanvas.Children.Add(drCell);
+            Canvas.SetLeft(drCell, x1);
+            Canvas.SetTop(drCell, y1);
+        }
+
+        public void NewTickDrow(object sender, TurnFinishedInfoEventArgs e)
+        {
+            int[,] current = e.CurrentCity;
+            for (int i = 0; i < CELLS_COUNT; i++)
+            {
+                for (int j = 0; j < CELLS_COUNT; j++)
+                {
+                    if (current[i,j] == 1)
+                    {
+                        DrowRectangle(i * STEP, j * STEP);
+                    }
+                }
+            }
         }
     }
 }

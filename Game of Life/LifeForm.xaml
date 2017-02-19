@@ -9,7 +9,7 @@
       WindowHeight="1080" WindowWidth="1920"
       Title="LifeForm">
 
-    <Grid x:Name="myGrid">
+    <Canvas x:Name="myCanvas">
         
-    </Grid>
+    </Canvas>
 </Page>

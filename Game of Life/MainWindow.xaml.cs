@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Game_of_Life
 {
@@ -32,7 +33,6 @@ namespace Game_of_Life
         {
             NavigationService.Navigate(new Uri("/LifeForm.xaml",
                 UriKind.Relative));
-            //LifeForm life = new LifeForm(this.WindowWidth, this.WindowHeight);
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
