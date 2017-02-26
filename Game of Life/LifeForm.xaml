@@ -9,7 +9,7 @@
       WindowHeight="1080" WindowWidth="1920"
       Title="LifeForm">
 
-    <Canvas x:Name="myCanvas">
+    <Canvas x:Name="myCanvas" MouseDown="myCanvas_MouseDown">
         
     </Canvas>
 </Page>

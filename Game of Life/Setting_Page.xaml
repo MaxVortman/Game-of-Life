@@ -29,13 +29,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" FontSize="12">Game Mode:</Label>
-        <ComboBox Grid.Column="1" Grid.Row="3" Name="GameMode">
-            <TextBlock>Standart Edition</TextBlock>
-            <TextBlock>Special Edition</TextBlock>
+        <ComboBox Grid.Column="1" Grid.Row="3" Name="Game_Mode">
+            <TextBlock>Standart</TextBlock>
+            <TextBlock>Special</TextBlock>
         </ComboBox>
         <DockPanel Grid.Column="1" Grid.Row="5" Height="Auto" Width="Auto">
             <Label DockPanel.Dock="Top" VerticalAlignment="Stretch" FontSize="12">Cells Count:</Label>
-            <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="25" VerticalAlignment="Top" x:Name="CellsCount" />
+            <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="25" VerticalAlignment="Top" x:Name="Cells_Count" />
             <Slider Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="slValue" VerticalAlignment="Bottom"/>
         </DockPanel>
 

@@ -22,13 +22,23 @@ namespace Game_of_Life
     {
 
         private static int CELLS_COUNT;
+        private static string GAME_MODE;
 
         public Setting_Page()
         {
             InitializeComponent();
         }
 
-        public int Cells_Count
+        public static string GameMode
+        {
+            get
+            {
+                return GAME_MODE;
+            }
+
+        }
+
+        public int CellsCount
         {
             get
             {
@@ -36,9 +46,12 @@ namespace Game_of_Life
             }
         }
 
+        
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CELLS_COUNT = int.Parse(CellsCount.Text);
+            CELLS_COUNT = int.Parse(Cells_Count.Text);
+            GAME_MODE = Game_Mode.Text;
             NavigationService.GoBack();
         }
     }

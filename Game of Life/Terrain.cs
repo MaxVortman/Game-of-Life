@@ -20,7 +20,7 @@ namespace Game_of_Life
 
     class Terrain
     {
-        private int[,] terrain;
+        public int[,] terrain;
         private int CELLS;
         Random r = new Random();
         public event EventHandler<TurnFinishedInfoEventArgs> TurnFinished;
@@ -48,11 +48,7 @@ namespace Game_of_Life
             
             for (;;)
             {
-                //Thread start = new Thread(BirthORDie);
-                //start.Start();
                 BirthORDie();
-                
-                
             }
         }
 

@@ -55,12 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameModesInterface.cs" />
+    <Compile Include="GraphicalApp.cs" />
     <Compile Include="LifeForm.xaml.cs">
       <DependentUpon>LifeForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Setting_Page.xaml.cs">
       <DependentUpon>Setting_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpecialMode.cs" />
+    <Compile Include="StandartMode.cs" />
     <Compile Include="Terrain.cs" />
     <Page Include="LifeForm.xaml">
       <SubType>Designer</SubType>
