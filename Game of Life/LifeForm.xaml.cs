@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace Game_of_Life
 {
@@ -38,9 +39,11 @@ namespace Game_of_Life
             HEIGHT = this.Height;
             CELLS_COUNT = settings.Cells_Count;
             STEP = (int)(WIDTH / CELLS_COUNT);
-            DrowCells();
+           // DrowCells();
             t = new Terrain(CELLS_COUNT);
-            t.TurnFinished += NewTickDrow;         
+            t.TurnFinished += NewTickDrow;
+            Thread th = new Thread(t.StartGame);
+            th.Start();
         }
 
         private void DrowCells()
@@ -54,42 +57,54 @@ namespace Game_of_Life
 
         private void DrowLine(int x1, int x2, int y1, int y2)
         {
-                // Add a Line Element
-                myLine = new Line();
-                myLine.Stroke = Brushes.LightSteelBlue;
-                myLine.X1 = x1;
-                myLine.X2 = x2;
-                myLine.Y1 = y1;
-                myLine.Y2 = y2;                
-                myLine.StrokeThickness = 1;
-                myCanvas.Children.Add(myLine);
+            // Add a Line Element
+            myLine = new Line();
+            myLine.Stroke = Brushes.LightSteelBlue;
+            myLine.X1 = x1;
+            myLine.X2 = x2;
+            myLine.Y1 = y1;
+            myLine.Y2 = y2;
+            myLine.StrokeThickness = 1;
+            myCanvas.Children.Add(myLine);
         }
 
         private void DrowRectangle(int x1, int y1)
         {
-            Rectangle drCell = new Rectangle();
-            drCell.Stroke = Brushes.Black;
-            drCell.Fill = Brushes.SkyBlue;
-            drCell.Height = STEP;
-            drCell.Width = STEP;
-            myCanvas.Children.Add(drCell);
-            Canvas.SetLeft(drCell, x1);
-            Canvas.SetTop(drCell, y1);
+                   Rectangle drCell = new Rectangle();
+                   drCell.Stroke = Brushes.Black;
+                   drCell.Fill = Brushes.SkyBlue;
+                   drCell.Height = STEP;
+                   drCell.Width = STEP;
+                   myCanvas.Children.Add(drCell);
+                   Canvas.SetLeft(drCell, x1);
+                   Canvas.SetTop(drCell, y1);
         }
+
 
         public void NewTickDrow(object sender, TurnFinishedInfoEventArgs e)
         {
-            int[,] current = e.CurrentCity;
-            for (int i = 0; i < CELLS_COUNT; i++)
-            {
-                for (int j = 0; j < CELLS_COUNT; j++)
-                {
-                    if (current[i,j] == 1)
-                    {
-                        DrowRectangle(i * STEP, j * STEP);
-                    }
-                }
-            }
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                  (ThreadStart)delegate ()
+                  {
+                      //var rectangles = myCanvas.Children.OfType<Rectangle>().ToList();
+                      //foreach (var rectangle in rectangles)
+                      //{
+                      //    myCanvas.Children.Remove(rectangle);
+                      //}
+                      myCanvas.Children.Clear();
+                      DrowCells();
+                      int[,] current = e.CurrentCity;
+                      for (int i = 0; i < CELLS_COUNT; i++)
+                      {
+                          for (int j = 0; j < CELLS_COUNT; j++)
+                          {
+                              if (current[i, j] == 1)
+                              {
+                                  DrowRectangle(i * STEP, j * STEP);
+                              }
+                          }
+                      }
+                  });
         }
     }
 }

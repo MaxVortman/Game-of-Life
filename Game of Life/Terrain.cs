@@ -43,18 +43,31 @@ namespace Game_of_Life
             }
         }
 
-        public void BirthORDie()
+        public void StartGame()
+        {
+            
+            for (;;)
+            {
+                //Thread start = new Thread(BirthORDie);
+                //start.Start();
+                BirthORDie();
+                
+                
+            }
+        }
+
+        private void BirthORDie()
         {
             int[,] city = new int[CELLS, CELLS];
             for (int i = 0; i < CELLS; i++)
             {
                 for (int j = 0; j < CELLS; j++)
                 {
-                    if (this.terrain[i, j] == 0 && NearMoreThanTwo(i, j))
+                    if (this.terrain[i, j] == 0 && exactlyThree(i, j))
                     {
                         city[i, j] = 1;
                     }
-                    else if (this.terrain[i,j] == 1 && LessThanThreeORmoreThanFour(i, j))
+                    else if (this.terrain[i,j] == 1 && lessThanTwoORmoreThanThree(i, j))
                     {
                         city[i, j] = 0;
                     }
@@ -66,18 +79,18 @@ namespace Game_of_Life
             }
 
             this.terrain = city;
-
+            Thread.Sleep(500);
             TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(terrain));
         }
 
-        private bool NearMoreThanTwo(int i, int j) => CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +
-            CellsValue(i + 1, j - 1) + CellsValue(i, j - 1) + CellsValue(i - 1, j - 1) + CellsValue(i - 1, j) + CellsValue(i - 1, j + 1) > 2;
+        private bool exactlyThree(int i, int j) => CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +
+            CellsValue(i + 1, j - 1) + CellsValue(i, j - 1) + CellsValue(i - 1, j - 1) + CellsValue(i - 1, j) + CellsValue(i - 1, j + 1) == 3;
 
-        private bool LessThanThreeORmoreThanFour(int i, int j)
+        private bool lessThanTwoORmoreThanThree(int i, int j)
         {
             int CountNeigbour = CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +
             CellsValue(i + 1, j - 1) + CellsValue(i, j - 1) + CellsValue(i - 1, j - 1) + CellsValue(i - 1, j) + CellsValue(i - 1, j + 1);
-            if (CountNeigbour > 4 || CountNeigbour < 3)
+            if (CountNeigbour > 3 || CountNeigbour < 2)
             {
                 return true;
             }
