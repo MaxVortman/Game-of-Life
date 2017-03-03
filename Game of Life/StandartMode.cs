@@ -23,6 +23,7 @@ namespace Game_of_Life
         Setting_Page settings = new Setting_Page();
         GraphicalApp graphics;
         Terrain terr;
+        Scanner scan;
         private int CELLS_COUNT;
 
         public StandartMode(LifeForm ThatWindow)
@@ -30,8 +31,11 @@ namespace Game_of_Life
             CELLS_COUNT = settings.CellsCount;
             graphics = new GraphicalApp(ThatWindow);
             CELLS_COUNT = settings.CellsCount;
-            terr = new Terrain(CELLS_COUNT);
+            terr = new Terrain();
+            scan = new Scanner(terr, ThatWindow);
+            terr.CELLS1 = CELLS_COUNT;
             terr.TurnFinished += NewTickDrow;
+            terr.CreateRandom();
             Thread lifeThread = new Thread(terr.StartGame);
             lifeThread.Start();
         }

@@ -23,20 +23,28 @@ namespace Game_of_Life
         public int[,] terrain;
         private int CELLS;
         Random r = new Random();
-        public event EventHandler<TurnFinishedInfoEventArgs> TurnFinished;
 
-        public Terrain(int cells)
+        public int CELLS1
         {
-            CELLS = cells;
-            CreateRandom();            
-        }       
-
-        private void CreateRandom()
-        {
-            terrain = new int[CELLS, CELLS];
-            for (int i = 0; i < CELLS; i++)
+            get
             {
-                for (int j = 0; j < CELLS; j++)
+                return CELLS;
+            }
+
+            set
+            {
+                CELLS = value;
+            }
+        }
+
+        public event EventHandler<TurnFinishedInfoEventArgs> TurnFinished;  
+
+        public void CreateRandom()
+        {
+            terrain = new int[CELLS1, CELLS1];
+            for (int i = 0; i < CELLS1; i++)
+            {
+                for (int j = 0; j < CELLS1; j++)
                 {
                     terrain[i, j] = r.Next(0, 2);
                 }
@@ -54,10 +62,10 @@ namespace Game_of_Life
 
         private void BirthORDie()
         {
-            int[,] city = new int[CELLS, CELLS];
-            for (int i = 0; i < CELLS; i++)
+            int[,] city = new int[CELLS1, CELLS1];
+            for (int i = 0; i < CELLS1; i++)
             {
-                for (int j = 0; j < CELLS; j++)
+                for (int j = 0; j < CELLS1; j++)
                 {
                     if (this.terrain[i, j] == 0 && exactlyThree(i, j))
                     {
@@ -95,7 +103,7 @@ namespace Game_of_Life
 
         private int CellsValue(int i, int j)
         {
-            if(i < 0 || j < 0 || i >= CELLS || j >= CELLS)
+            if(i < 0 || j < 0 || i >= CELLS1 || j >= CELLS1)
             {
                 return 0;
             }

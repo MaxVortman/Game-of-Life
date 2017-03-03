@@ -55,17 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FavoritesForm.xaml.cs">
+      <DependentUpon>FavoritesForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameModesInterface.cs" />
     <Compile Include="GraphicalApp.cs" />
     <Compile Include="LifeForm.xaml.cs">
       <DependentUpon>LifeForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scanner.cs" />
     <Compile Include="Setting_Page.xaml.cs">
       <DependentUpon>Setting_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpecialMode.cs" />
     <Compile Include="StandartMode.cs" />
     <Compile Include="Terrain.cs" />
+    <Page Include="FavoritesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LifeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

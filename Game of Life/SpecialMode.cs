@@ -31,7 +31,7 @@ namespace Game_of_Life
         public SpecialMode()
         {
             CELLS_COUNT = settings.CellsCount;
-            terr = new Terrain(CELLS_COUNT);
+            terr = new Terrain();
             WIDTH = ThatWindow.Width;
             HEIGHT = ThatWindow.Height;
             STEP = (int)(WIDTH / CELLS_COUNT);

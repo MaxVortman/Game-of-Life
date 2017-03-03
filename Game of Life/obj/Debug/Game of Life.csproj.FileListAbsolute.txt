@@ -17,3 +17,5 @@ C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\G
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\Setting_Page.g.cs
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\LifeForm.g.cs
 C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\LifeForm.baml
+C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\FavoritesForm.g.cs
+C:\Users\Максим Борисович\Documents\Visual Studio 2015\Projects\Game of Life\Game-of-Life\Game of Life\obj\Debug\FavoritesForm.baml
