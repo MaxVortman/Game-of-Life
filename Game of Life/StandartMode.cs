@@ -25,24 +25,35 @@ namespace Game_of_Life
         Terrain terr;
         Scanner scan;
         private int CELLS_COUNT;
+        public Thread lifeThread { get; }
 
         public StandartMode(LifeForm ThatWindow)
         {
             CELLS_COUNT = settings.CellsCount;
-            graphics = new GraphicalApp(ThatWindow);
+            
             CELLS_COUNT = settings.CellsCount;
             terr = new Terrain();
+            terr.WIDTH1 = ThatWindow.Width;
+            
             scan = new Scanner(terr, ThatWindow);
-            terr.CELLS1 = CELLS_COUNT;
+            terr.TurnFinished += scan.StartScan;
             terr.TurnFinished += NewTickDrow;
+            terr.CELLS1 = CELLS_COUNT;
             terr.CreateRandom();
-            Thread lifeThread = new Thread(terr.StartGame);
+
+            FavoritesForm favor = new FavoritesForm(ThatWindow);
+            graphics = new GraphicalApp(ThatWindow, favor);
+            scan.PatternDetected += favor.Sc_PatternDetected;
+
+
+
+            lifeThread = new Thread(terr.StartGame);
             lifeThread.Start();
         }
 
         public void NewTickDrow(object sender, TurnFinishedInfoEventArgs e)
         {            
-            graphics.DrowRectangles(e.CurrentCity);
+            graphics.DrowRectanglesOnLifeForm(e.CurrentCity);
         }
 
         

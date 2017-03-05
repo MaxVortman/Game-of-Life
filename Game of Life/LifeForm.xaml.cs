@@ -29,6 +29,7 @@ namespace Game_of_Life
         {
             InitializeComponent();
 
+
             switch (Setting_Page.GameMode)
             {
                 case "Standart":
@@ -40,12 +41,34 @@ namespace Game_of_Life
             }
         }
 
+        
+
         private void myCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Setting_Page.GameMode == "Special")
             {
                 special.mouseDown(e);
             }
+        }
+
+        private void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                if (standart.lifeThread != null)
+                {
+                    if (standart.lifeThread.IsAlive)
+                    {
+                        standart.lifeThread.Abort();
+                    }
+                }
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigating += NavigationService_Navigating;
+
         }
     }
 }

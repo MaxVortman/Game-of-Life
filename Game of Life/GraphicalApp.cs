@@ -17,7 +17,7 @@ using System.Windows.Threading;
 
 namespace Game_of_Life
 {
-    class GraphicalApp
+    public class GraphicalApp
     {
 
         private int CELLS_COUNT;
@@ -25,13 +25,15 @@ namespace Game_of_Life
         private double HEIGHT;
         Setting_Page settings = new Setting_Page();
         LifeForm ThatWindow;
+        FavoritesForm favor;
         private Line myLine;
         private int STEP;
 
 
-        public GraphicalApp(LifeForm thatWindow)
+        public GraphicalApp(LifeForm thatWindow, FavoritesForm favor)
         {
             ThatWindow = thatWindow;
+            this.favor = favor;
             WIDTH = ThatWindow.Width;
             HEIGHT = ThatWindow.Height;
             CELLS_COUNT = settings.CellsCount;
@@ -39,16 +41,16 @@ namespace Game_of_Life
         }
 
 
-        private void DrowGrid()
+        private void DrowGrid(Canvas myCanvas)
         {
             for (int i = 0; i <= CELLS_COUNT; i++)
             {
-                DrowLine(i * STEP, i * STEP, 0, CELLS_COUNT * STEP);
-                DrowLine(0, CELLS_COUNT * STEP, i * STEP, i * STEP);
+                DrowLine(i * STEP, i * STEP, 0, CELLS_COUNT * STEP, myCanvas);
+                DrowLine(0, CELLS_COUNT * STEP, i * STEP, i * STEP, myCanvas);
             }
         }
 
-        private void DrowLine(int x1, int x2, int y1, int y2)
+        private void DrowLine(int x1, int x2, int y1, int y2, Canvas myCanvas)
         {
             // Add a Line Element
             myLine = new Line();
@@ -58,39 +60,68 @@ namespace Game_of_Life
             myLine.Y1 = y1;
             myLine.Y2 = y2;
             myLine.StrokeThickness = 1;
-            ThatWindow.myCanvas.Children.Add(myLine);
+            myCanvas.Children.Add(myLine);
         }
 
-        private void DrowRectangle(int x1, int y1)
+        private void DrowRectangle(int y1, int x1, Canvas myCanvas)
         {
             Rectangle drCell = new Rectangle();
             drCell.Stroke = Brushes.Black;
             drCell.Fill = Brushes.SkyBlue;
             drCell.Height = STEP;
             drCell.Width = STEP;
-            ThatWindow.myCanvas.Children.Add(drCell);
+            myCanvas.Children.Add(drCell);
             Canvas.SetLeft(drCell, x1);
             Canvas.SetTop(drCell, y1);
         }
 
-        public void DrowRectangles(int[,] current)
+        public void DrowRectanglesOnLifeForm(int[,] current)
         {
             ThatWindow.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
                   (ThreadStart)delegate ()
                   {
                       ThatWindow.myCanvas.Children.Clear();
-                      DrowGrid();                      
+                      DrowGrid(ThatWindow.myCanvas);                      
                       for (int i = 0; i < CELLS_COUNT; i++)
                       {
                           for (int j = 0; j < CELLS_COUNT; j++)
                           {
                               if (current[i, j] == 1)
                               {
-                                  DrowRectangle(i * STEP, j * STEP);
+                                  DrowRectangle(i * STEP, j * STEP, ThatWindow.myCanvas);
                               }
                           }
                       }
                   });
+            //ThatWindow.Dispatcher.BeginInvokeShutdown(DispatcherPriority.SystemIdle);
         }
+
+        public void DrowRectanglesOnFavoritesForm(Pattern pattern, int x, int y)
+        {
+            DrowGrid(favor.myCanvas);
+            //Create a struct!!!
+            //int width = 0;
+            //int height = 0;
+            //howLength(current, ref width, ref height);
+            for (int i = 0; i < pattern.height; i++)
+            {
+                for (int j = 0; j < pattern.width; j++)
+                {
+                    if (pattern.mas[i, j] == 1)
+                    {
+                        DrowRectangle((i+x) * STEP, (j+y) * STEP, favor.myCanvas);
+                    }
+                }
+            }
+        }
+
+        //private void howLength(int[,] mas, ref int width, ref int height)
+        //{
+        //    int i = 0;
+        //    while (i < )
+        //    {
+
+        //    }
+        //}
     }
 }

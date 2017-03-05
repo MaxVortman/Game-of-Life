@@ -22,6 +22,7 @@ namespace Game_of_Life
     {
         public int[,] terrain;
         private int CELLS;
+        private double WIDTH;
         Random r = new Random();
 
         public int CELLS1
@@ -34,6 +35,19 @@ namespace Game_of_Life
             set
             {
                 CELLS = value;
+            }
+        }
+
+        public double WIDTH1
+        {
+            get
+            {
+                return WIDTH;
+            }
+
+            set
+            {
+                WIDTH = value;
             }
         }
 
@@ -53,9 +67,16 @@ namespace Game_of_Life
 
         public void StartGame()
         {
-            
+            //int[,] t = new int[CELLS, CELLS];
+            //t[0, 0] = 1;
+            //t[0, 1] = 1;
+            //t[1, 0] = 1;
+            //t[1, 1] = 1;
             for (;;)
             {
+
+                //TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(t));
+                //Thread.Sleep(200);
                 BirthORDie();
             }
         }
@@ -83,8 +104,8 @@ namespace Game_of_Life
             }
 
             this.terrain = city;
-            Thread.Sleep(500);
             TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(terrain));
+            Thread.Sleep(100);
         }
 
         private bool exactlyThree(int i, int j) => CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +

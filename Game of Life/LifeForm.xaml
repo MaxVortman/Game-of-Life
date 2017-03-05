@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       Height="1000" Width="1000"
       WindowHeight="1080" WindowWidth="1920"
-      Title="LifeForm">
+      Title="LifeForm" Loaded="Page_Loaded">
 
     <Canvas x:Name="myCanvas" MouseDown="myCanvas_MouseDown">
         
