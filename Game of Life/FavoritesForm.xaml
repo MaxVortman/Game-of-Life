@@ -7,5 +7,5 @@
         mc:Ignorable="d"
         Title="FavoritesForm" Height="1000" Width="1000">
 
-    <Canvas x:Name="myCanvas" MaxHeight="900" MaxWidth="900" Margin="75,75,75,75"/>
+    <Canvas x:Name="myCanvas" MaxHeight="900" MaxWidth="1000" Margin="75,75,75,75"/>
 </Window>
