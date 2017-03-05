@@ -130,35 +130,13 @@ namespace Game_of_Life
 
         public void StartScan(object sender, TurnFinishedInfoEventArgs e)
         {
-            //ThatWindow.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-            //      (ThreadStart)delegate ()
-            //      {
-            //          var cells = ThatWindow.myCanvas.Children.OfType<Rectangle>().ToList();
-            //          CELLS = terr.CELLS1;
-            //          STEP = (int)(ThatWindow.Width / CELLS);
-            //          ExtendedTerr = getExpansion(e.CurrentCity);
-            //          foreach (var cell in cells)
-            //          {
-            //              int x = (int)Canvas.GetLeft(cell) / STEP;
-            //              int y = (int)Canvas.GetTop(cell) / STEP;
-            //              isPattern(x + 1, y + 1);
-            //          }
-            //      });         
-
             CELLS = terr.CELLS1;
             STEP = (int)(terr.WIDTH1 / CELLS);
             ExtendedTerr = getExpansion(e.CurrentCity);
             for (int i = 0; i < CELLS; i++)
-            {
                 for (int j = 0; j < CELLS; j++)
-                {
                     if (e.CurrentCity[i, j] == 1)
-                    {
                         isPattern(i, j);
-                    }
-                }
-            }
-
         }
 
         private void isPattern(int x, int y)
@@ -201,7 +179,7 @@ namespace Game_of_Life
             {
                 for (int j = 0; j < pattern.width; j++)
                 {
-                    if (y+j>=CELLS+2 || x+i>=CELLS+2 || pattern.mas[i, j] != ExtendedTerr[x + i, y + j])
+                    if (y+j>CELLS+3 || x+i>CELLS+3 || pattern.mas[i, j] != ExtendedTerr[x + i, y + j])
                     {
                         return false; 
                     }
@@ -210,10 +188,10 @@ namespace Game_of_Life
             return true;
         }
 
+        int[,] forWhat;
         private int[,] getExpansion(int[,] What)
         {
-
-            int[,] forWhat = new int[CELLS + 4, CELLS + 4];
+            forWhat = new int[CELLS + 4, CELLS + 4];
             for (int i = 0; i < CELLS + 4; i++)
             {
                 for (int j = 0; j < CELLS + 4; j++)

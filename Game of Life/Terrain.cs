@@ -105,7 +105,7 @@ namespace Game_of_Life
 
             this.terrain = city;
             TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(terrain));
-            Thread.Sleep(100);
+            Thread.Sleep(300);
         }
 
         private bool exactlyThree(int i, int j) => CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +

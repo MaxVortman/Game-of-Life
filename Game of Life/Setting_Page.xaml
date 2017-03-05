@@ -36,7 +36,7 @@
         <DockPanel Grid.Column="1" Grid.Row="5" Height="Auto" Width="Auto">
             <Label DockPanel.Dock="Top" VerticalAlignment="Stretch" FontSize="12">Cells Count:</Label>
             <TextBox Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="25" VerticalAlignment="Top" x:Name="Cells_Count" />
-            <Slider Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="slValue" VerticalAlignment="Bottom"/>
+            <Slider Maximum="100" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="slValue" VerticalAlignment="Bottom"/>
         </DockPanel>
 
         <Button Grid.Column="1" Grid.Row="8" Click="Button_Click">OK</Button>

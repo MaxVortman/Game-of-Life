@@ -23,8 +23,8 @@ namespace Game_of_Life
     {
         public MainWindow()
         {
-            this.WindowHeight = 1000;
-            this.WindowWidth = 1000;
+            this.WindowHeight = 500;
+            this.WindowWidth = 500;
             InitializeComponent();
             
         }

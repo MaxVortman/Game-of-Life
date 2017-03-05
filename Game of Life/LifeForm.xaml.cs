@@ -55,11 +55,15 @@ namespace Game_of_Life
         {
             if (e.NavigationMode == NavigationMode.Back)
             {
-                if (standart.lifeThread != null)
+                if (standart?.lifeThread != null)
                 {
                     if (standart.lifeThread.IsAlive)
                     {
-                        standart.lifeThread.Abort();
+                        standart.lifeThread.Abort();                                                
+                    }
+                    if (standart.favor.IsEnabled)
+                    {
+                        standart.favor.Close();
                     }
                 }
             }

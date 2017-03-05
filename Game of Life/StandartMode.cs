@@ -24,6 +24,7 @@ namespace Game_of_Life
         GraphicalApp graphics;
         Terrain terr;
         Scanner scan;
+        public FavoritesForm favor { get; }
         private int CELLS_COUNT;
         public Thread lifeThread { get; }
 
@@ -41,7 +42,7 @@ namespace Game_of_Life
             terr.CELLS1 = CELLS_COUNT;
             terr.CreateRandom();
 
-            FavoritesForm favor = new FavoritesForm(ThatWindow);
+            favor = new FavoritesForm(ThatWindow);
             graphics = new GraphicalApp(ThatWindow, favor);
             scan.PatternDetected += favor.Sc_PatternDetected;
 

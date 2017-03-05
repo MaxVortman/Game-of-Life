@@ -24,16 +24,15 @@ namespace Game_of_Life
 
         LifeForm ThatWindow;
         GraphicalApp graphics;
-        private static int[,] terrForFavor;
 
         public FavoritesForm(LifeForm ThatWindow)
         {
             this.ThatWindow = ThatWindow;
             this.graphics = new GraphicalApp(ThatWindow, this);
             InitializeComponent();
-
-            //Scanner sc = new Scanner(new Terrain(), new LifeForm());
-            //sc.PatternDetected += Sc_PatternDetected;
+            graphics.DrowGrid(myCanvas);
+            //this.Height = myCanvas.Height;
+            //this.Width = myCanvas.Width;
         }
 
         public void Sc_PatternDetected(object sender, PatternInfoEventArgs e)
@@ -42,7 +41,6 @@ namespace Game_of_Life
                   (ThreadStart)delegate ()
                   {
                       this.Show();
-                      //x+1, y+1
                       graphics.DrowRectanglesOnFavoritesForm(e.KindOfPattern, e.X - 2, e.Y - 2);
                   });
         }
