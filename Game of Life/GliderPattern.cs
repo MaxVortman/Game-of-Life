@@ -8,7 +8,7 @@ namespace Game_of_Life
 {
     class GliderPattern : Pattern
     {
-        public GliderPattern()
+        public GliderPattern(int cells, int[,] ter) : base(cells, ter)
         {
             int[,] glider =
            {
@@ -23,6 +23,8 @@ namespace Game_of_Life
             mas = glider;
             height = 7;
             width = 7;
+            currentHeight = 3;
+            currentWidth = 3;
         }
     }
 }

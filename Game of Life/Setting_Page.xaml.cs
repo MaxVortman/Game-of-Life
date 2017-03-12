@@ -52,6 +52,8 @@ namespace Game_of_Life
         {
             CELLS_COUNT = int.Parse(Cells_Count.Text);
             GAME_MODE = Game_Mode.Text;
+
+
             NavigationService.GoBack();
         }
     }

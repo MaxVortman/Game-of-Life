@@ -8,7 +8,7 @@ namespace Game_of_Life
 {
     class BlockPattern : Pattern
     {
-        public BlockPattern()
+        public BlockPattern(int cells, int[,] ter) : base(cells, ter) 
         {
              int[,] mas =
                 {
@@ -22,6 +22,8 @@ namespace Game_of_Life
             this.mas = mas;
             height = 6;
             width = 6;
+            currentHeight = 2;
+            currentWidth = 2;
         }
     }
 }

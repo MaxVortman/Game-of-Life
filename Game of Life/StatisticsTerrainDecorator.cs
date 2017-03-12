@@ -9,6 +9,10 @@ namespace Game_of_Life
 {
     class StatisticsTerrainDecorator : TerrainDecorator
     {
+        public StatisticsTerrainDecorator(Terrain terr) : base(terr)
+        {
+        }
+
         public override void MakeTurn()
         {
             Stopwatch stopwatch = new Stopwatch();

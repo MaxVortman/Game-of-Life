@@ -8,7 +8,7 @@ namespace Game_of_Life
 {
     class HivePattern : Pattern
     {
-        public HivePattern()
+        public HivePattern(int cells, int[,] ter) : base(cells, ter)
         {
             int[,] hive =
             {
@@ -24,6 +24,8 @@ namespace Game_of_Life
             mas = hive;
             height = 8;
             width = 7;
+            currentHeight = 4;
+            currentWidth = 3;
         }
     }
 }

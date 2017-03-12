@@ -13,10 +13,11 @@ namespace Game_of_Life
 
         Canvas myCanvas;
         private int[,] ExtendedTerr;
+        private int[,] patternTerr;
 
         public ScannerTerrainDecorator(Canvas myCanvas, Terrain terr) : base(terr)
         {
-            this.myCanvas = myCanvas;
+            this.myCanvas = myCanvas;            
         }
 
         public override void MakeTurn()
@@ -26,74 +27,76 @@ namespace Game_of_Life
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             //удаление не паттернов
-
+            StartScan();
             stopwatch.Stop();
             setStatistics("Время сканирования: " + Convert.ToString(stopwatch.Elapsed));
 
 
-            base.Drow(myCanvas);
+            base.Drow(myCanvas, createCell());
+        }
+
+        private Cell[,] createCell()
+        {
+            Cell[,] newCell = new Cell[CELLS_COUNT, CELLS_COUNT];
+            for (int i = 0; i < CELLS_COUNT; i++)
+            {
+                for (int j = 0; j < CELLS_COUNT; j++)
+                {
+                    newCell[i, j].State = patternTerr[i, j];
+                }
+            }
+            return newCell;
         }
 
         private void StartScan()
         {           
             ExtendedTerr = getExpansion(terrain);
+            patternTerr = new int[CELLS_COUNT, CELLS_COUNT];
             for (int i = 0; i < CELLS_COUNT; i++)
                 for (int j = 0; j < CELLS_COUNT; j++)
                     if (terrain[i, j].State == 1)
-                        isPattern(i, j);
+                        isPattern(j, i);
         }
 
         private void isPattern(int x, int y)
         {
-            if (isBlock(x, y))
+            Pattern pattern = new BlockPattern(CELLS_COUNT, ExtendedTerr);
+            if (pattern.isEqually(x, y))
             {
-                
+                DeletePattern(pattern, x, y);
             }
-            else if (x > 0 && isHive(x - 1, y))
+            pattern = new HivePattern(CELLS_COUNT, ExtendedTerr);
+            if (x > 0 && pattern.isEqually(x - 1, y))
             {
-                
+                DeletePattern(pattern, x - 1, y);
             }
-            else if (isFlasher(x, y))
+            pattern = new FlasherPattern(CELLS_COUNT, ExtendedTerr);
+            if (pattern.isEqually(x, y))
             {
-                
+                DeletePattern(pattern, x, y);
             }
-            else if (x > 0 && isGlider(x - 1, y))
+            pattern = new GliderPattern(CELLS_COUNT, ExtendedTerr);
+            if (x > 0 && pattern.isEqually(x - 1, y))
             {
-               
+                DeletePattern(pattern, x - 1, y);
             }
-            else if (x > 1 && isPentaDecathlon(x - 2, y))
+            pattern = new PentadecathlonPattern(CELLS_COUNT, ExtendedTerr);
+            if (x > 1 && pattern.isEqually(x - 2, y))
             {
-                
+                DeletePattern(pattern, x - 2, y);
             }
         }
 
-        private bool isPentaDecathlon(int x, int y)
+        private void DeletePattern(Pattern pattern, int x, int y)
         {
-            Pattern 
-            return isEqually(Pentadecathlon, x, y);
-        }
-
-        private bool isGlider(int x, int y) => isEqually(Glider, x, y);
-
-        private bool isFlasher(int x, int y) => isEqually(Flasher, x, y);
-
-        private bool isBlock(int x, int y) => isEqually(Block, x, y);
-
-        private bool isHive(int x, int y) => isEqually(Hive, x, y);
-
-        private bool isEqually(Pattern pattern, int x, int y)
-        {
-            for (int i = 0; i < pattern.height; i++)
+            for (int i = 0; i < pattern.currentHeight; i++)
             {
-                for (int j = 0; j < pattern.width; j++)
+                for (int j = 0; j < pattern.currentWidth; j++)
                 {
-                    if (y + j > CELLS_COUNT + 3 || x + i > CELLS_COUNT + 3 || pattern.mas[i, j] != ExtendedTerr[x + i, y + j])
-                    {
-                        return false;
-                    }
+                    terrain[y + i, x + j].State = 0;
+                    patternTerr[y + i, x + j] = 1;
                 }
             }
-            return true;
         }
 
         int[,] forWhat;

@@ -6,18 +6,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Game_of_Life"
       mc:Ignorable="d" 
-      d:DesignHeight="250" d:DesignWidth="200"
+      d:DesignHeight="400" d:DesignWidth="400"
       Title="Setting_Page">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
@@ -40,5 +40,11 @@
         </DockPanel>
 
         <Button Grid.Column="1" Grid.Row="8" Click="Button_Click">OK</Button>
+
+        <DockPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Height="Auto" Width="Auto">
+            <CheckBox Name="CheckCells" Content="Draw cells?" DockPanel.Dock="Top"></CheckBox>
+            <CheckBox Name="CheckStat" Content="Do you want to display statistics?" DockPanel.Dock="Bottom"></CheckBox>
+            <CheckBox Name="CheckScan" Content="Do you want to scan?"></CheckBox>
+        </DockPanel>
     </Grid>
 </Page>

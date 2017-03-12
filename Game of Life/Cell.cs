@@ -73,13 +73,13 @@ namespace Game_of_Life
             return act;
         }
 
-        private bool exactlyThree() => neighbors[0,0].State + neighbors[0,1].State + neighbors[0,2].State +
-            neighbors[1,0].State + neighbors[1,2].State + neighbors[2,0].State + neighbors[2,1].State + neighbors[2,2].State == 3;
+        private bool exactlyThree() => neighbors[0,0]?.State + neighbors[0,1]?.State + neighbors[0,2]?.State +
+            neighbors[1,0]?.State + neighbors[1,2]?.State + neighbors[2,0]?.State + neighbors[2,1]?.State + neighbors[2,2]?.State == 3;
 
         private bool lessThanTwoORmoreThanThree()
         {
-            int CountNeigbour = neighbors[0, 0].State + neighbors[0, 1].State + neighbors[0, 2].State +
-            neighbors[1, 0].State + neighbors[1, 2].State + neighbors[2, 0].State + neighbors[2, 1].State + neighbors[2, 2].State;
+            int? CountNeigbour = neighbors[0, 0]?.State + neighbors[0, 1]?.State + neighbors[0, 2]?.State +
+            neighbors[1, 0]?.State + neighbors[1, 2]?.State + neighbors[2, 0]?.State + neighbors[2, 1]?.State + neighbors[2, 2]?.State;
             if (CountNeigbour > 3 || CountNeigbour < 2)
             {
                 return true;

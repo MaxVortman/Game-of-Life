@@ -8,7 +8,7 @@ namespace Game_of_Life
 {
     class FlasherPattern : Pattern
     {
-        public FlasherPattern()
+        public FlasherPattern(int cells, int[,] ter) : base(cells, ter)
         {
             int[,] flasher =
             {
@@ -23,6 +23,8 @@ namespace Game_of_Life
             mas = flasher;
             height = 7;
             width = 5;
+            currentHeight = 3;
+            currentWidth = 1;
         }
     }
 }

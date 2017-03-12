@@ -9,9 +9,13 @@ namespace Game_of_Life
 {
     class FramedCellsTerrainDecorator : TerrainDecorator
     {
-        public override void Drow(Canvas myCanvas)
+        public FramedCellsTerrainDecorator(Terrain terr) : base(terr)
         {
-            base.Drow(myCanvas);
+        }
+
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
+        {
+            base.Drow(myCanvas, terrain);
             terr.DrowGrid(myCanvas);
         }
     }

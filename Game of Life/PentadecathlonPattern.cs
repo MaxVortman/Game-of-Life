@@ -8,7 +8,7 @@ namespace Game_of_Life
 {
     class PentadecathlonPattern : Pattern
     {
-        public PentadecathlonPattern()
+        public PentadecathlonPattern(int cells, int[,] ter) : base(cells, ter)
         {
             int[,] pentadecathlon =
             {

@@ -22,27 +22,11 @@ namespace Game_of_Life
     public partial class FavoritesForm : Window
     {
 
-        LifeForm ThatWindow;
-        GraphicalApp graphics;
 
-        public FavoritesForm(LifeForm ThatWindow)
-        {
-            this.ThatWindow = ThatWindow;
-            this.graphics = new GraphicalApp(ThatWindow, this);
+        public FavoritesForm()
+        {           
             InitializeComponent();
-            graphics.DrowGrid(myCanvas);
-            //this.Height = myCanvas.Height;
-            //this.Width = myCanvas.Width;
         }
 
-        public void Sc_PatternDetected(object sender, PatternInfoEventArgs e)
-        {
-            ThatWindow.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                  (ThreadStart)delegate ()
-                  {
-                      this.Show();
-                      graphics.DrowRectanglesOnFavoritesForm(e.KindOfPattern, e.X - 2, e.Y - 2);
-                  });
-        }
     }
 }

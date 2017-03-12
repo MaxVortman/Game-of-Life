@@ -23,7 +23,6 @@ namespace Game_of_Life
     public partial class LifeForm : Page
     {
         StandartMode standart;
-        SpecialMode special;
 
         public LifeForm()
         {
@@ -34,10 +33,7 @@ namespace Game_of_Life
             {
                 case "Standart":
                     standart = new StandartMode(this);
-                    break;
-                case "Special":
-                    special = new SpecialMode();
-                    break;
+                    break;                
             }
         }
 
@@ -49,7 +45,7 @@ namespace Game_of_Life
                 {
                     if (standart.lifeThread.IsAlive)
                     {
-                        standart.lifeThread.Abort();                                                
+                        standart.lifeThread.Abort();
                     }
                     if (standart.favor.IsEnabled)
                     {

@@ -16,7 +16,7 @@ namespace Game_of_Life
 
         public string statistics { get; protected set; }
 
-        abstract public void Drow(Canvas myCanvas);
+        abstract public void Drow(Canvas myCanvas, Cell[,] terrain);
 
         abstract public void MakeTurn();
 

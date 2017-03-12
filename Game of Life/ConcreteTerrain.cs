@@ -30,7 +30,7 @@ namespace Game_of_Life
 
         private void CreateRandom()
         {
-            //terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
+            terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
             CellsCreate(terrain);
             for (int i = 0; i < CELLS_COUNT; i++)
             {
@@ -62,7 +62,7 @@ namespace Game_of_Life
 
             this.terrain = terrain;
 
-            Drow(myCanvas);
+            Drow(myCanvas, this.terrain);
 
             setStatistics("Колличество инфузорий: " + numberOfInfusorians() + "/n");
             setStatistics("Их процент от всех клеток: " + numberOfInfusorians() / (CELLS_COUNT * CELLS_COUNT) * 100 + "%/n");
@@ -114,7 +114,7 @@ namespace Game_of_Life
                     {
                         terrain[i, j].setNeighbors(null, null, null, terrain[i, j-1], null, terrain[i, j + 1], terrain[i+1, j-1], terrain[i+1, j], terrain[i+1, j+1]);
                     }
-                    else if (i == CELLS_COUNT)
+                    else if (i == CELLS_COUNT - 1)
                     {
                         terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], terrain[i - 1, j + 1], terrain[i, j-1], null, terrain[i, j + 1], null, null, null);
                     }
@@ -134,8 +134,8 @@ namespace Game_of_Life
             }
         }
 
-        public override void Drow(Canvas myCanvas)
-        {
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
+        {            
             for (int i = 0; i < CELLS_COUNT; i++)
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
