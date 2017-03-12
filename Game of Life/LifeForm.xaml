@@ -10,7 +10,7 @@
       Title="LifeForm" Loaded="Page_Loaded"
       VerticalAlignment="Center" HorizontalAlignment="Center">
 
-    <Canvas x:Name="myCanvas" MouseDown="myCanvas_MouseDown">
+    <Canvas x:Name="myCanvas">
         
     </Canvas>
 </Page>

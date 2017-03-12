@@ -88,12 +88,6 @@ namespace Game_of_Life {
             return;
             case 2:
             this.myCanvas = ((System.Windows.Controls.Canvas)(target));
-            
-            #line 13 "..\..\LifeForm.xaml"
-            this.myCanvas.MouseDown += new System.Windows.Input.MouseButtonEventHandler(this.myCanvas_MouseDown);
-            
-            #line default
-            #line hidden
             return;
             }
             this._contentLoaded = true;

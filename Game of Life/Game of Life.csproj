@@ -56,6 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cell.cs" />
+    <Compile Include="FramedCellsTerrainDecorator.cs" />
+    <Compile Include="TerrainDecorator.cs" />
     <Compile Include="FavoritesForm.xaml.cs">
       <DependentUpon>FavoritesForm.xaml</DependentUpon>
     </Compile>
@@ -65,11 +67,14 @@
       <DependentUpon>LifeForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scanner.cs" />
+    <Compile Include="ScannerTerrainDecorator.cs" />
     <Compile Include="Setting_Page.xaml.cs">
       <DependentUpon>Setting_Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpecialMode.cs" />
     <Compile Include="StandartMode.cs" />
+    <Compile Include="ConcreteTerrain.cs" />
+    <Compile Include="StatisticsTerrainDecorator.cs" />
     <Compile Include="Terrain.cs" />
     <Page Include="FavoritesForm.xaml">
       <SubType>Designer</SubType>

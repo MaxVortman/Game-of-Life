@@ -8,6 +8,6 @@ namespace Game_of_Life
 {
     interface GameModesInterface
     {
-        void NewTickDrow(object sender, TurnFinishedInfoEventArgs e);                
+        //void NewTickDrow(object sender, TurnFinishedInfoEventArgs e);                
     }
 }

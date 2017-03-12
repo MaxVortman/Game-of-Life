@@ -21,42 +21,25 @@ namespace Game_of_Life
     {
 
         Setting_Page settings = new Setting_Page();
-        GraphicalApp graphics;
         Terrain terr;
-        Scanner scan;
-        public FavoritesForm favor { get; }
         private int CELLS_COUNT;
-        public Thread lifeThread { get; }
+        private int STEP;
+        private double WIDTH;
+        //public Thread lifeThread { get; }
 
         public StandartMode(LifeForm ThatWindow)
         {
             CELLS_COUNT = settings.CellsCount;
+            WIDTH = ThatWindow.Width;
+            STEP = (int)(WIDTH / CELLS_COUNT);
+            terr = new ConcreteTerrain(CELLS_COUNT, STEP, ThatWindow.myCanvas);
             
-            CELLS_COUNT = settings.CellsCount;
-            terr = new Terrain();
-            terr.WIDTH1 = ThatWindow.Width;
-            
-            scan = new Scanner(terr, ThatWindow);
-            terr.TurnFinished += scan.StartScan;
-            terr.TurnFinished += NewTickDrow;
-            terr.CELLS1 = CELLS_COUNT;
-            terr.CreateRandom();
-
-            favor = new FavoritesForm(ThatWindow);
-            graphics = new GraphicalApp(ThatWindow, favor);
-            scan.PatternDetected += favor.Sc_PatternDetected;
+            //берем статистику от сюда terr.statistics
 
 
-
-            lifeThread = new Thread(terr.StartGame);
-            lifeThread.Start();
+            //lifeThread = new Thread(terr.StartGame);
+            //lifeThread.Start();
         }
-
-        public void NewTickDrow(object sender, TurnFinishedInfoEventArgs e)
-        {            
-            graphics.DrowRectanglesOnLifeForm(e.CurrentCity);
-        }
-
         
     }
 }

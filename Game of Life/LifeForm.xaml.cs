@@ -41,16 +41,6 @@ namespace Game_of_Life
             }
         }
 
-        
-
-        private void myCanvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Setting_Page.GameMode == "Special")
-            {
-                special.mouseDown(e);
-            }
-        }
-
         private void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.Back)
