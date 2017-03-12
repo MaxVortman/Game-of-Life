@@ -55,8 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BlockPattern.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="FlasherPattern.cs" />
     <Compile Include="FramedCellsTerrainDecorator.cs" />
+    <Compile Include="GliderPattern.cs" />
+    <Compile Include="HivePattern.cs" />
+    <Compile Include="Pattern.cs" />
+    <Compile Include="PentadecathlonPattern.cs" />
     <Compile Include="TerrainDecorator.cs" />
     <Compile Include="FavoritesForm.xaml.cs">
       <DependentUpon>FavoritesForm.xaml</DependentUpon>

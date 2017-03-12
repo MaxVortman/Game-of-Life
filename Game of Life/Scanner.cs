@@ -18,20 +18,20 @@ using System.Windows.Threading;
 namespace Game_of_Life
 {
 
-    public class Pattern
-    {
+    //public class Pattern
+    //{
 
-        public int width { get; private set; }
-        public int height { get; private set; }
-        public int[,] mas { get; private set; }
+    //    public int width { get; private set; }
+    //    public int height { get; private set; }
+    //    public int[,] mas { get; private set; }
 
-        public Pattern(int width, int height, int[,] mas)
-        {
-            this.width = width;
-            this.height = height;
-            this.mas = mas;
-        }
-    }
+    //    public Pattern(int width, int height, int[,] mas)
+    //    {
+    //        this.width = width;
+    //        this.height = height;
+    //        this.mas = mas;
+    //    }
+    //}
 
     public class PatternInfoEventArgs : EventArgs
     {

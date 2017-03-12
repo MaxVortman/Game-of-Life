@@ -13,9 +13,7 @@ namespace Game_of_Life
 
     class ConcreteTerrain : Terrain
     {
-        public Cell[,] terrain;
-        private int CELLS_COUNT;
-        private int STEP;
+        
         Random r = new Random();
         private Line myLine;
         Canvas myCanvas;
@@ -32,7 +30,7 @@ namespace Game_of_Life
 
         private void CreateRandom()
         {
-            terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
+            //terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
             CellsCreate(terrain);
             for (int i = 0; i < CELLS_COUNT; i++)
             {

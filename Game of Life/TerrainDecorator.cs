@@ -9,31 +9,39 @@ namespace Game_of_Life
 {
     abstract class TerrainDecorator : Terrain
     {
-        protected Terrain terrain;
+        protected Terrain terr;
+
+        public TerrainDecorator(Terrain terr)
+        {
+            this.terr = terr;
+            terrain = terr.terrain;
+            STEP = terr.STEP;
+            CELLS_COUNT = terr.CELLS_COUNT;
+        }
 
         public void SetTerrain(Terrain terrain)
         {
-            this.terrain = terrain;
+            this.terr = terrain;
         }
 
         public override void Drow(Canvas myCanvas)
         {
-            terrain.Drow(myCanvas);
+            terr.Drow(myCanvas);
         }
 
         public override void MakeTurn()
         {
-            terrain.MakeTurn();
+            terr.MakeTurn();
         }
 
         public override void DrowGrid(Canvas myCanvas)
         {
-            terrain.DrowGrid(myCanvas);
+            terr.DrowGrid(myCanvas);
         }
 
         public new void setStatistics(string str)
         {
-            statistics = terrain.statistics + str;
+            statistics = terr.statistics + str;
         }
     }
 }

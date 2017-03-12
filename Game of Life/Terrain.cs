@@ -10,6 +10,10 @@ namespace Game_of_Life
     abstract class Terrain
     {
 
+        public int CELLS_COUNT;
+        public int STEP;
+        public Cell[,] terrain;
+
         public string statistics { get; protected set; }
 
         abstract public void Drow(Canvas myCanvas);
