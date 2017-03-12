@@ -8,11 +8,11 @@ namespace Game_of_Life
 {
     class Pattern
     {
-        protected int height;
-        protected int width;
+        public int height { get; protected set; }
+        public int width { get; protected set; }
         public int currentHeight { get; protected set; }
         public int currentWidth { get; protected set; }
-        protected int[,] mas;
+        public int[,] mas { get; protected set; }
         protected int CELLS;
         protected int[,] ExtendedTerr;
 

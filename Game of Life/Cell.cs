@@ -14,7 +14,7 @@ namespace Game_of_Life
 
         private Cell[,] neighbors;
         private int state;
-        public bool act { get; private set; } //Appear(true) or disappear(false)
+        public int act { get; private set; } //Appear(true) or disappear(false)
         private const byte NUMBER_OF_NEIGHBORS = 3;
         private int X;
         private int Y;
@@ -59,15 +59,19 @@ namespace Game_of_Life
             }  
         }
 
-        public bool isAction()
+        public int isAction()
         {
-            if (exactlyThree())
+            if (exactlyThree() && state == 0)
             {
-                act = true;
+                act = 1;
             }
-            else if (lessThanTwoORmoreThanThree())
+            else if (lessThanTwoORmoreThanThree() && state == 1)
             {
-                act = false;
+                act = 0;
+            }
+            else
+            {
+                act = -1;
             }
 
             return act;

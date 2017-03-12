@@ -16,7 +16,13 @@ namespace Game_of_Life
         public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
             base.Drow(myCanvas, terrain);
-            terr.DrowGrid(myCanvas);
+            base.DrowGrid(myCanvas);
+        }
+
+        public override void MakeTurn()
+        {
+            base.MakeTurn();
+            this.statistics = terr.statistics;
         }
     }
 }

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Game_of_Life"
       mc:Ignorable="d" 
-      Height="1000" Width="1000"
+      Height="800" Width="800"
       WindowHeight="1000" WindowWidth="1000"
       Title="LifeForm" Loaded="Page_Loaded"
       VerticalAlignment="Center" HorizontalAlignment="Center">

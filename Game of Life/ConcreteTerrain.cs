@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Game_of_Life
 {
@@ -16,14 +17,14 @@ namespace Game_of_Life
         
         Random r = new Random();
         private Line myLine;
-        Canvas myCanvas;
+        LifeForm ThatWindow;
 
-
-        public ConcreteTerrain(int cells_count, int step, Canvas myCanvas)
+        public ConcreteTerrain(int cells_count, int step, LifeForm ThatWindow)
         {
             CELLS_COUNT = cells_count;
             STEP = step;
-            this.myCanvas = myCanvas;
+            this.ThatWindow = ThatWindow;
+            this.myCanvas = ThatWindow.myCanvas;
             CreateRandom();
         }
 
@@ -49,23 +50,28 @@ namespace Game_of_Life
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
                 {
-                    if (this.terrain[i,j].isAction())
+                    int act = this.terrain[i, j].isAction();
+                    if (act == 1)
                     {
                         terrain[i, j].State = 1;
                     }
-                    else
+                    else if (act == 0)
                     {
                         terrain[i, j].State = 0;
+                    }
+                    else
+                    {
+                        terrain[i, j].State = this.terrain[i, j].State;
                     }
                 }
             }
 
             this.terrain = terrain;
 
-            Drow(myCanvas, this.terrain);
-
-            setStatistics("Колличество инфузорий: " + numberOfInfusorians() + "/n");
-            setStatistics("Их процент от всех клеток: " + numberOfInfusorians() / (CELLS_COUNT * CELLS_COUNT) * 100 + "%/n");
+            //Drow(myCanvas, this.terrain);
+            statistics = "";
+            setStatistics("Колличество инфузорий: " + numberOfInfusorians() + "\n");
+            setStatistics("Их процент от всех клеток: " + (double)numberOfInfusorians() / (double)(CELLS_COUNT * CELLS_COUNT) * 100 + "%\n");
         }
 
         private int numberOfInfusorians()
@@ -135,18 +141,20 @@ namespace Game_of_Life
         }
 
         public override void Drow(Canvas myCanvas, Cell[,] terrain)
-        {            
-            for (int i = 0; i < CELLS_COUNT; i++)
-            {
-                for (int j = 0; j < CELLS_COUNT; j++)
-                {
-                    if (terrain[i,j].State == 1)
-                    {
-                        //drowing
-                        DrowRectangle(i * STEP, j * STEP, myCanvas);
-                    }
-                }
-            }
+        {
+               ThatWindow.myCanvas.Children.Clear();
+               for (int i = 0; i < CELLS_COUNT; i++)
+               {
+                   for (int j = 0; j < CELLS_COUNT; j++)
+                   {
+                       if (terrain[i, j].State == 1)
+                       {
+                           //drowing
+                           DrowRectangle(i * STEP, j * STEP, myCanvas);
+                       }
+                   }
+               }
+            
         }
 
         public override void DrowGrid(Canvas myCanvas)

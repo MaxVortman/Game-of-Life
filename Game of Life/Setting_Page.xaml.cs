@@ -23,6 +23,9 @@ namespace Game_of_Life
 
         private static int CELLS_COUNT;
         private static string GAME_MODE;
+        public static bool isCheckCells { get; private set; }
+        public static bool isCheckStat { get; private set; }
+        public static bool isCheckScan { get; private set; }
 
         public Setting_Page()
         {
@@ -53,6 +56,9 @@ namespace Game_of_Life
             CELLS_COUNT = int.Parse(Cells_Count.Text);
             GAME_MODE = Game_Mode.Text;
 
+            isCheckCells = (bool)CheckCells.IsChecked;
+            isCheckStat = (bool)CheckStat.IsChecked;
+            isCheckScan = (bool)CheckScan.IsChecked;
 
             NavigationService.GoBack();
         }

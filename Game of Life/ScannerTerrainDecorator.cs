@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
@@ -10,14 +11,15 @@ namespace Game_of_Life
 {
     class ScannerTerrainDecorator : TerrainDecorator
     {
-
-        Canvas myCanvas;
+        FavoritesForm favor;
+        new Canvas myCanvas;
         private int[,] ExtendedTerr;
-        private int[,] patternTerr;
+        private Cell[,] newCell;
 
-        public ScannerTerrainDecorator(Canvas myCanvas, Terrain terr) : base(terr)
+        public ScannerTerrainDecorator(FavoritesForm favor, Terrain terr) : base(terr)
         {
-            this.myCanvas = myCanvas;            
+            this.myCanvas = favor.myCanvas;
+            this.favor = favor;      
         }
 
         public override void MakeTurn()
@@ -29,20 +31,31 @@ namespace Game_of_Life
             //удаление не паттернов
             StartScan();
             stopwatch.Stop();
-            setStatistics("Время сканирования: " + Convert.ToString(stopwatch.Elapsed));
+            setStatistics("Время сканирования: " + Convert.ToString(stopwatch.Elapsed) + "\n");
 
-
-            base.Drow(myCanvas, createCell());
+            favor.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                base.Drow(myCanvas, newCell);
+            });
+            
         }
 
-        private Cell[,] createCell()
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
-            Cell[,] newCell = new Cell[CELLS_COUNT, CELLS_COUNT];
-            for (int i = 0; i < CELLS_COUNT; i++)
+            base.Drow(myCanvas, terrain);
+        }
+
+
+        private Cell[,] createCell(Pattern pattern, int x, int y)
+        {
+            for (int i = 0; i < pattern.height; i++)
             {
-                for (int j = 0; j < CELLS_COUNT; j++)
+                for (int j = 0; j < pattern.width; j++)
                 {
-                    newCell[i, j].State = patternTerr[i, j];
+                    if (pattern.mas[i,j] == 1)
+                    {
+                        newCell[y + i, x + j].State = 1;
+                    }
                 }
             }
             return newCell;
@@ -51,8 +64,15 @@ namespace Game_of_Life
         private void StartScan()
         {           
             ExtendedTerr = getExpansion(terrain);
-            patternTerr = new int[CELLS_COUNT, CELLS_COUNT];
+            newCell = new Cell[CELLS_COUNT, CELLS_COUNT];
             for (int i = 0; i < CELLS_COUNT; i++)
+            {
+                for (int j = 0; j < CELLS_COUNT; j++)
+                {
+                    newCell[i, j] = new Cell(i, j);
+                }
+            }
+                    for (int i = 0; i < CELLS_COUNT; i++)
                 for (int j = 0; j < CELLS_COUNT; j++)
                     if (terrain[i, j].State == 1)
                         isPattern(j, i);
@@ -64,26 +84,32 @@ namespace Game_of_Life
             if (pattern.isEqually(x, y))
             {
                 DeletePattern(pattern, x, y);
+                createCell(pattern, x, y);
+
             }
             pattern = new HivePattern(CELLS_COUNT, ExtendedTerr);
             if (x > 0 && pattern.isEqually(x - 1, y))
             {
                 DeletePattern(pattern, x - 1, y);
+                createCell(pattern, x-1, y);
             }
             pattern = new FlasherPattern(CELLS_COUNT, ExtendedTerr);
             if (pattern.isEqually(x, y))
             {
                 DeletePattern(pattern, x, y);
+                createCell(pattern, x, y);
             }
             pattern = new GliderPattern(CELLS_COUNT, ExtendedTerr);
             if (x > 0 && pattern.isEqually(x - 1, y))
             {
                 DeletePattern(pattern, x - 1, y);
+                createCell(pattern, x-1, y);
             }
             pattern = new PentadecathlonPattern(CELLS_COUNT, ExtendedTerr);
             if (x > 1 && pattern.isEqually(x - 2, y))
             {
                 DeletePattern(pattern, x - 2, y);
+                createCell(pattern, x-2, y);
             }
         }
 
@@ -94,7 +120,6 @@ namespace Game_of_Life
                 for (int j = 0; j < pattern.currentWidth; j++)
                 {
                     terrain[y + i, x + j].State = 0;
-                    patternTerr[y + i, x + j] = 1;
                 }
             }
         }

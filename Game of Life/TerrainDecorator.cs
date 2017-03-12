@@ -17,6 +17,7 @@ namespace Game_of_Life
             terrain = terr.terrain;
             STEP = terr.STEP;
             CELLS_COUNT = terr.CELLS_COUNT;
+            statistics = terr.statistics;
         }
 
         public void SetTerrain(Terrain terrain)
@@ -26,7 +27,7 @@ namespace Game_of_Life
 
         public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
-            terr.Drow(myCanvas, terrain);
+            terr.Drow(myCanvas, terr.terrain);
         }
 
         public override void MakeTurn()
@@ -41,7 +42,8 @@ namespace Game_of_Life
 
         public new void setStatistics(string str)
         {
-            statistics = terr.statistics + str;
+            //this.statistics = terr.statistics + str;
+            this.statistics = terr.statistics + str;
         }
     }
 }

@@ -35,24 +35,21 @@ namespace Game_of_Life
             CELLS_COUNT = settings.CellsCount;
             WIDTH = ThatWindow.Width;
             STEP = (int)(WIDTH / CELLS_COUNT);
-            terr = new ConcreteTerrain(CELLS_COUNT, STEP, ThatWindow.myCanvas);
+            terr = new ConcreteTerrain(CELLS_COUNT, STEP, ThatWindow);
 
-            if ((bool)settings.CheckScan.IsChecked)
+            if (Setting_Page.isCheckScan)
             {
-                terr = new ScannerTerrainDecorator(favor.myCanvas, terr);
-                favor.Activate();
+                terr = new ScannerTerrainDecorator(favor, terr);
+                favor.Show();
             }
-            if ((bool)settings.CheckStat.IsChecked)
+            if (Setting_Page.isCheckStat)
             {
                 terr = new StatisticsTerrainDecorator(terr);
             }
-            if ((bool)settings.CheckCells.IsChecked)
+            if (Setting_Page.isCheckCells)
             {
                 terr = new FramedCellsTerrainDecorator(terr);
             }
-
-
-            StartGame();
             //берем статистику от сюда terr.statistics
 
 
@@ -63,10 +60,16 @@ namespace Game_of_Life
 
         private void StartGame()
         {
-            for (;;Thread.Sleep(300))
-            {                
+            for (;;Thread.Sleep(1000))
+            {
+                terr.statistics = "";             
                 terr.MakeTurn();
-                ThatWindow.LabelStat.Content = terr.statistics;
+                ThatWindow.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (ThreadStart)delegate ()
+                {                  
+                    ThatWindow.LabelStat.Content = terr.statistics;
+                    terr.Drow(ThatWindow.myCanvas, terr.terrain);
+                });
+                
             }
         }
 
