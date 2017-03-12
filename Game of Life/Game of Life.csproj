@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cell.cs" />
     <Compile Include="FavoritesForm.xaml.cs">
       <DependentUpon>FavoritesForm.xaml</DependentUpon>
     </Compile>

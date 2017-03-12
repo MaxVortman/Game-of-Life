@@ -20,7 +20,7 @@ namespace Game_of_Life
 
     class Terrain
     {
-        public int[,] terrain;
+        public Cell[,] terrain;
         private int CELLS;
         private double WIDTH;
         Random r = new Random();
@@ -55,80 +55,100 @@ namespace Game_of_Life
 
         public void CreateRandom()
         {
-            terrain = new int[CELLS1, CELLS1];
-            for (int i = 0; i < CELLS1; i++)
+            terrain = new Cell[CELLS, CELLS];
+            CellsCreate(terrain);
+            for (int i = 0; i < CELLS; i++)
             {
-                for (int j = 0; j < CELLS1; j++)
+                for (int j = 0; j < CELLS; j++)
                 {
-                    terrain[i, j] = r.Next(0, 2);
+                    terrain[i, j].State = r.Next(0, 2);
                 }
             }
         }
 
         public void StartGame()
-        {
-            //int[,] t = new int[CELLS, CELLS];
-            //t[0, 0] = 1;
-            //t[0, 1] = 1;
-            //t[1, 0] = 1;
-            //t[1, 1] = 1;
+        {           
             for (;;)
-            {
-
-                //TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(t));
-                //Thread.Sleep(200);
+            {                
                 BirthORDie();
             }
         }
 
         private void BirthORDie()
         {
-            int[,] city = new int[CELLS1, CELLS1];
-            for (int i = 0; i < CELLS1; i++)
+            Cell[,] terrain = new Cell[CELLS, CELLS];
+            CellsCreate(terrain);
+            for (int i = 0; i < CELLS; i++)
             {
-                for (int j = 0; j < CELLS1; j++)
+                for (int j = 0; j < CELLS; j++)
                 {
-                    if (this.terrain[i, j] == 0 && exactlyThree(i, j))
+                    if (this.terrain[i,j].isAction())
                     {
-                        city[i, j] = 1;
-                    }
-                    else if (this.terrain[i,j] == 1 && lessThanTwoORmoreThanThree(i, j))
-                    {
-                        city[i, j] = 0;
+                        terrain[i, j].State = 1;
                     }
                     else
                     {
-                        city[i, j] = terrain[i, j];
+                        terrain[i, j].State = 0;
                     }
                 }
             }
 
-            this.terrain = city;
-            TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(terrain));
+            this.terrain = terrain;
+            //TurnFinished?.Invoke(this, new TurnFinishedInfoEventArgs(this.terrain));
             Thread.Sleep(300);
         }
 
-        private bool exactlyThree(int i, int j) => CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +
-            CellsValue(i + 1, j - 1) + CellsValue(i, j - 1) + CellsValue(i - 1, j - 1) + CellsValue(i - 1, j) + CellsValue(i - 1, j + 1) == 3;
-
-        private bool lessThanTwoORmoreThanThree(int i, int j)
+        private void CellsCreate(Cell[,] terrain)
         {
-            int CountNeigbour = CellsValue(i, j + 1) + CellsValue(i + 1, j + 1) + CellsValue(i + 1, j) +
-            CellsValue(i + 1, j - 1) + CellsValue(i, j - 1) + CellsValue(i - 1, j - 1) + CellsValue(i - 1, j) + CellsValue(i - 1, j + 1);
-            if (CountNeigbour > 3 || CountNeigbour < 2)
+            for (int i = 0; i < CELLS; i++)
             {
-                return true;
+                for (int j = 0; j < CELLS; j++)
+                {
+                    terrain[i, j] = new Cell(i, j);
+                }
             }
-            return false;
-        }
-
-        private int CellsValue(int i, int j)
-        {
-            if(i < 0 || j < 0 || i >= CELLS1 || j >= CELLS1)
+            for (int i = 0; i < CELLS; i++)
             {
-                return 0;
+                for (int j = 0; j < CELLS; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        terrain[i, j].setNeighbors(null, null, null, null, null, terrain[i, j + 1], null, terrain[i + 1, j], terrain[i + 1, j + 1]);
+                    }
+                    else if (i == 0 && j == CELLS - 1)
+                    {
+                        terrain[i, j].setNeighbors(null, null, null, terrain[i, j-1], null, null, terrain[i+1, j-1], terrain[i + 1, j], null);
+                    }
+                    else if (i == CELLS - 1 && j == 0)
+                    {
+                        terrain[i, j].setNeighbors(null, terrain[i-1, j], terrain[i-1, j+1], null, null, terrain[i, j + 1], null, null, null);
+                    }
+                    else if (i == CELLS - 1 && j == CELLS - 1)
+                    {
+                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], null, terrain[i, j-1], null, null, null, null, null);
+                    }
+                    else if (i == 0)
+                    {
+                        terrain[i, j].setNeighbors(null, null, null, terrain[i, j-1], null, terrain[i, j + 1], terrain[i+1, j-1], terrain[i+1, j], terrain[i+1, j+1]);
+                    }
+                    else if (i == CELLS)
+                    {
+                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], terrain[i - 1, j + 1], terrain[i, j-1], null, terrain[i, j + 1], null, null, null);
+                    }
+                    else if (j == 0)
+                    {
+                        terrain[i, j].setNeighbors(null, terrain[i - 1, j], terrain[i - 1, j + 1], null, null, terrain[i, j + 1], null, terrain[i+1, j], terrain[i+1, j+1]);
+                    }
+                    else if (j == CELLS -1)
+                    {
+                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], null, terrain[i, j-1], null, null, terrain[i+1, j-1], terrain[i+1, j], null);
+                    }
+                    else
+                    {
+                        terrain[i, j].setNeighbors(terrain[i - 1, j - 1], terrain[i - 1, j], terrain[i-1, j+1], terrain[i, j - 1], null, terrain[i, j+1], terrain[i + 1, j - 1], terrain[i + 1, j], terrain[i+1, j+1]);
+                    }
+                }
             }
-            return terrain[i,j];
         }
     }
 }
