@@ -64,10 +64,10 @@ namespace Game_of_Life
         private void StartScan()
         {           
             ExtendedTerr = getExpansion(terrain);
-            newCell = new Cell[CELLS_COUNT, CELLS_COUNT];
-            for (int i = 0; i < CELLS_COUNT; i++)
+            newCell = new Cell[CELLS_COUNT + 4, CELLS_COUNT + 4];
+            for (int i = 0; i < CELLS_COUNT + 4; i++)
             {
-                for (int j = 0; j < CELLS_COUNT; j++)
+                for (int j = 0; j < CELLS_COUNT + 4; j++)
                 {
                     newCell[i, j] = new Cell(i, j);
                 }

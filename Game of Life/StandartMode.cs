@@ -60,7 +60,7 @@ namespace Game_of_Life
 
         private void StartGame()
         {
-            for (;;Thread.Sleep(1000))
+            for (;;Thread.Sleep(300))
             {
                 terr.statistics = "";             
                 terr.MakeTurn();
