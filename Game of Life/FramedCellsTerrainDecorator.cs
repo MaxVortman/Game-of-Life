@@ -13,7 +13,7 @@ namespace Game_of_Life
         {
         }
 
-        public override void Drow(Canvas myCanvas, Cell[,] terrain)
+        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
         {
             base.Drow(myCanvas, terrain);
             base.DrowGrid(myCanvas);

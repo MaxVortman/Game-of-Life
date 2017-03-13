@@ -31,7 +31,7 @@ namespace Game_of_Life
 
         private void CreateRandom()
         {
-            terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
+            terrain = new WhiteCell[CELLS_COUNT, CELLS_COUNT];
             CellsCreate(terrain);
             for (int i = 0; i < CELLS_COUNT; i++)
             {
@@ -44,7 +44,7 @@ namespace Game_of_Life
 
         public override void MakeTurn()
         {
-            Cell[,] terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
+            WhiteCell[,] terrain = new WhiteCell[CELLS_COUNT, CELLS_COUNT];
             CellsCreate(terrain);
             for (int i = 0; i < CELLS_COUNT; i++)
             {
@@ -87,13 +87,13 @@ namespace Game_of_Life
             return count;
         }
 
-        private void CellsCreate(Cell[,] terrain)
+        private void CellsCreate(WhiteCell[,] terrain)
         {
             for (int i = 0; i < CELLS_COUNT; i++)
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
                 {
-                    terrain[i, j] = new Cell(i, j);
+                    terrain[i, j] = new WhiteCell(i, j);
                 }
             }
             for (int i = 0; i < CELLS_COUNT; i++)
@@ -140,7 +140,7 @@ namespace Game_of_Life
             }
         }
 
-        public override void Drow(Canvas myCanvas, Cell[,] terrain)
+        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
         {
                ThatWindow.myCanvas.Children.Clear();
                for (int i = 0; i < CELLS_COUNT; i++)

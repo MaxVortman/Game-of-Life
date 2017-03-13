@@ -14,7 +14,7 @@ namespace Game_of_Life
         FavoritesForm favor;
         new Canvas myCanvas;
         private int[,] ExtendedTerr;
-        private Cell[,] newCell;
+        private WhiteCell[,] newCell;
 
         public ScannerTerrainDecorator(FavoritesForm favor, Terrain terr) : base(terr)
         {
@@ -40,13 +40,13 @@ namespace Game_of_Life
             
         }
 
-        public override void Drow(Canvas myCanvas, Cell[,] terrain)
+        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
         {
             base.Drow(myCanvas, terrain);
         }
 
 
-        private Cell[,] createCell(Pattern pattern, int x, int y)
+        private WhiteCell[,] createCell(Pattern pattern, int x, int y)
         {
             for (int i = 0; i < pattern.height; i++)
             {
@@ -64,12 +64,12 @@ namespace Game_of_Life
         private void StartScan()
         {           
             ExtendedTerr = getExpansion(terrain);
-            newCell = new Cell[CELLS_COUNT + 4, CELLS_COUNT + 4];
+            newCell = new WhiteCell[CELLS_COUNT + 4, CELLS_COUNT + 4];
             for (int i = 0; i < CELLS_COUNT + 4; i++)
             {
                 for (int j = 0; j < CELLS_COUNT + 4; j++)
                 {
-                    newCell[i, j] = new Cell(i, j);
+                    newCell[i, j] = new WhiteCell(i, j);
                 }
             }
                     for (int i = 0; i < CELLS_COUNT; i++)
@@ -125,7 +125,7 @@ namespace Game_of_Life
         }
 
         int[,] forWhat;
-        private int[,] getExpansion(Cell[,] terr)
+        private int[,] getExpansion(WhiteCell[,] terr)
         {            
             forWhat = new int[CELLS_COUNT + 4, CELLS_COUNT + 4];
             for (int i = 0; i < CELLS_COUNT + 4; i++)

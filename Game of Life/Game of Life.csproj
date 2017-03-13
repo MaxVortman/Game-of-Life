@@ -57,6 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="BlockPattern.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="RedCell.cs" />
+    <Compile Include="WhiteCell.cs" />
     <Compile Include="FlasherPattern.cs" />
     <Compile Include="FramedCellsTerrainDecorator.cs" />
     <Compile Include="GliderPattern.cs" />
@@ -122,6 +124,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ArchitectureOfTheWarIsWhiteAndRed.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

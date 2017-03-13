@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game_of_Life.Terrain" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YCAgAAAAACAAAgAAAIAABAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Terrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.TerrainDecorator" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAgAAAAACAAAgAAAAAEAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>TerrainDecorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.ScannerTerrainDecorator" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ZCAgIAAAAAAAAhAABAAAAAAAAAQAAAAAAAFAAAAAAAA=</HashCode>
+      <FileName>ScannerTerrainDecorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.StatisticsTerrainDecorator" Collapsed="true">
+    <Position X="8.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StatisticsTerrainDecorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.ConcreteTerrain" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAQICAAAgAAAAAEAAAABAAgAAAAAEABAAABAAA=</HashCode>
+      <FileName>ConcreteTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.FramedCellsTerrainDecorator" Collapsed="true">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FramedCellsTerrainDecorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.Pattern" Collapsed="true">
+    <Position X="14.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAEAAAAAAAAAQARACAAAAAAAAAAAQAEAAAAAAAAAA=</HashCode>
+      <FileName>Pattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.HivePattern" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HivePattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.GliderPattern" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GliderPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.FlasherPattern" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FlasherPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.PentadecathlonPattern" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PentadecathlonPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.BlockPattern" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BlockPattern.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.Cell" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAEAAAACAAAQAAAAAAgAAAAgACAEAAAABAAEYAA=</HashCode>
+      <FileName>Cell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.WhiteCell" Collapsed="true">
+    <Position X="10.25" Y="6.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WhiteCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_of_Life.RedCell">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RedCell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
