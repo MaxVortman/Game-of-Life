@@ -44,8 +44,7 @@ namespace Game_of_Life
 
         public override void MakeTurn()
         {
-            WhiteCell[,] terrain = new WhiteCell[CELLS_COUNT, CELLS_COUNT];
-            CellsCreate(terrain);
+            int[,] terrain = new int[CELLS_COUNT, CELLS_COUNT];
             for (int i = 0; i < CELLS_COUNT; i++)
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
@@ -53,20 +52,26 @@ namespace Game_of_Life
                     int act = this.terrain[i, j].isAction();
                     if (act == 1)
                     {
-                        terrain[i, j].State = 1;
+                        terrain[i, j] = 1;
                     }
                     else if (act == 0)
                     {
-                        terrain[i, j].State = 0;
+                        terrain[i, j] = 0;
                     }
                     else
                     {
-                        terrain[i, j].State = this.terrain[i, j].State;
+                        terrain[i, j] = this.terrain[i, j].State;
                     }
                 }
             }
 
-            this.terrain = terrain;
+            for (int i = 0; i < CELLS_COUNT; i++)
+            {
+                for (int j = 0; j < CELLS_COUNT; j++)
+                {
+                    this.terrain[i, j].State = terrain[i, j];
+                }
+            }
 
             //Drow(myCanvas, this.terrain);
             statistics = "";
