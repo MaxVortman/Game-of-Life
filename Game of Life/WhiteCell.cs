@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Game_of_Life
 {
@@ -10,6 +11,7 @@ namespace Game_of_Life
     {
         public WhiteCell(int Y, int X) : base(Y, X)
         {
+            color = Brushes.White;
         }
 
         //{ new Cell(), new Cell(), new Cell() },

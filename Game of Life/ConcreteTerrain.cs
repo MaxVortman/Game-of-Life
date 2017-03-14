@@ -155,7 +155,7 @@ namespace Game_of_Life
                        if (terrain[i, j].State == 1)
                        {
                            //drowing
-                           DrowRectangle(i * STEP, j * STEP, myCanvas);
+                           DrowRectangle(i * STEP, j * STEP, terrain[i,j].color, myCanvas);
                        }
                    }
                }
@@ -184,11 +184,11 @@ namespace Game_of_Life
             myCanvas.Children.Add(myLine);
         }
 
-        private void DrowRectangle(int y1, int x1, Canvas myCanvas)
+        private void DrowRectangle(int y1, int x1, SolidColorBrush color, Canvas myCanvas)
         {
             Rectangle drCell = new Rectangle();
             drCell.Stroke = Brushes.Black;
-            drCell.Fill = Brushes.SkyBlue;
+            drCell.Fill = color;
             drCell.Height = STEP;
             drCell.Width = STEP;
             myCanvas.Children.Add(drCell);

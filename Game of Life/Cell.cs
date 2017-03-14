@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace Game_of_Life
 {
@@ -13,6 +14,7 @@ namespace Game_of_Life
         protected const byte NUMBER_OF_NEIGHBORS = 3;
         protected int X;
         protected int Y;
+        public SolidColorBrush color { get; protected set; }
 
         public int State
         {
