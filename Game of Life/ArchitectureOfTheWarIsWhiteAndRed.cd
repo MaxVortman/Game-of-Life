@@ -17,7 +17,7 @@
   <Class Name="Game_of_Life.ScannerTerrainDecorator" Collapsed="true">
     <Position X="4" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ZCAgIAAAAAAAAhAABAAAAAAAAAQAAAAAAAFAAAAAAAA=</HashCode>
+      <HashCode>JAAgAAAAAAAAAhAABAAAAAAAAAAAAAAAAAFAAAAAAAA=</HashCode>
       <FileName>ScannerTerrainDecorator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -98,7 +98,7 @@
       <FileName>WhiteCell.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Game_of_Life.RedCell">
+  <Class Name="Game_of_Life.RedCell" Collapsed="true">
     <Position X="7.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

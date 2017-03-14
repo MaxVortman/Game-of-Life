@@ -12,12 +12,12 @@ namespace Game_of_Life
 
         public int CELLS_COUNT;
         public int STEP;
-        public WhiteCell[,] terrain;
+        public Cell[,] terrain;
         protected Canvas myCanvas;
 
         public string statistics { get; set; }
 
-        abstract public void Drow(Canvas myCanvas, WhiteCell[,] terrain);
+        abstract public void Drow(Canvas myCanvas, Cell[,] terrain);
 
         abstract public void MakeTurn();
 

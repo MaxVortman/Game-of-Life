@@ -47,10 +47,6 @@ namespace Game_of_Life
                     {
                         standart.lifeThread.Abort();
                     }
-                    if (standart.favor.IsEnabled)
-                    {
-                        standart.favor.Close();
-                    }
                 }
             }
         }

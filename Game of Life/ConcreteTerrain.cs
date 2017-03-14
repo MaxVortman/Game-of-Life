@@ -92,7 +92,7 @@ namespace Game_of_Life
             return count;
         }
 
-        private void CellsCreate(WhiteCell[,] terrain)
+        private void CellsCreate(Cell[,] terrain)
         {
             for (int i = 0; i < CELLS_COUNT; i++)
             {
@@ -145,7 +145,7 @@ namespace Game_of_Life
             }
         }
 
-        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
                ThatWindow.myCanvas.Children.Clear();
                for (int i = 0; i < CELLS_COUNT; i++)

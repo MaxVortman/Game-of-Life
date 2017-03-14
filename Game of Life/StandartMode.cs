@@ -23,7 +23,6 @@ namespace Game_of_Life
         Setting_Page settings = new Setting_Page();
         Terrain terr;
         LifeForm ThatWindow;
-        public FavoritesForm favor = new FavoritesForm();
         private int CELLS_COUNT;
         private int STEP;
         private double WIDTH;
@@ -39,8 +38,7 @@ namespace Game_of_Life
 
             if (Setting_Page.isCheckScan)
             {
-                terr = new ScannerTerrainDecorator(favor, terr);
-                favor.Show();
+                terr = new ScannerTerrainDecorator(terr);
             }
             if (Setting_Page.isCheckStat)
             {

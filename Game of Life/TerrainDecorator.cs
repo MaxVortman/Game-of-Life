@@ -25,7 +25,7 @@ namespace Game_of_Life
             this.terr = terrain;
         }
 
-        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
             terr.Drow(myCanvas, terrain);
         }

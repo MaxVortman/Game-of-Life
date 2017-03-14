@@ -24,7 +24,7 @@ namespace Game_of_Life
             setStatistics("Время затраченное на ход: " + Convert.ToString(stopwatch.Elapsed) + "\n");
         }
 
-        public override void Drow(Canvas myCanvas, WhiteCell[,] terrain)
+        public override void Drow(Canvas myCanvas, Cell[,] terrain)
         {
             base.Drow(myCanvas, terrain);
         }
