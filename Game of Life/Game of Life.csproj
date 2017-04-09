@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="BlockPattern.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="ColonyOfCells.cs" />
     <Compile Include="RedCell.cs" />
     <Compile Include="WhiteCell.cs" />
     <Compile Include="FlasherPattern.cs" />

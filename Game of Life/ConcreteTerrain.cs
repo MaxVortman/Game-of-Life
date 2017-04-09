@@ -18,6 +18,7 @@ namespace Game_of_Life
         Random r = new Random();
         private Line myLine;
         LifeForm ThatWindow;
+        List<ColonyOfCells> movingColonies = new List<ColonyOfCells>();
 
         public ConcreteTerrain(int cells_count, int step, LifeForm ThatWindow)
         {
@@ -31,7 +32,7 @@ namespace Game_of_Life
 
         private void CreateRandom()
         {
-            terrain = new WhiteCell[CELLS_COUNT, CELLS_COUNT];
+            terrain = new Cell[CELLS_COUNT, CELLS_COUNT];
             CellsCreate(terrain);
             for (int i = 0; i < CELLS_COUNT; i++)
             {
@@ -49,10 +50,45 @@ namespace Game_of_Life
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
                 {
+
+
+                    if (this.terrain[i, j].State == 1)
+                    {
+                        if (this.terrain[i, j].unificationWithTheEnemy())
+                        {
+                            swapSide(ref this.terrain[i, j]);
+                            if (this.terrain[i, j].GetType() == typeof(RedCell))
+                            {
+                                SetRandomDirection((RedCell)this.terrain[i, j]);
+                            }
+                        }
+                        else if (this.terrain[i, j].GetType() == typeof(RedCell) && isColonyCompound(((RedCell)this.terrain[i, j])))
+                        {
+                            SetRandomDirection((RedCell)this.terrain[i, j]);
+                        }
+                        else
+                        //mashing red cells for moving 
+                        if (this.terrain[i, j].GetType() == typeof(RedCell))
+                        {
+                            if (((RedCell)this.terrain[i, j]).colony.isDeadEnd())
+                            {
+                                SetRandomDirection(((RedCell)this.terrain[i, j]));
+                            }
+                            else
+                            {
+                                movingColonies.Add(((RedCell)this.terrain[i, j]).colony);
+                                MashingRedCells(((RedCell)this.terrain[i, j]).colony);
+                            }
+                        } 
+                    }
+
+
+
                     int act = this.terrain[i, j].isAction();
                     if (act == 1)
                     {
                         terrain[i, j] = 1;
+                       // this.terrain[i, j] = new WhiteCell(i, j);
                     }
                     else if (act == 0)
                     {
@@ -62,9 +98,12 @@ namespace Game_of_Life
                     {
                         terrain[i, j] = this.terrain[i, j].State;
                     }
+
+
+
                 }
             }
-
+          
             for (int i = 0; i < CELLS_COUNT; i++)
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
@@ -73,11 +112,119 @@ namespace Game_of_Life
                 }
             }
 
-            //Drow(myCanvas, this.terrain);
+            MovingColonies();
+
             statistics = "";
             setStatistics("Колличество инфузорий: " + numberOfInfusorians() + "\n");
             setStatistics("Их процент от всех клеток: " + (double)numberOfInfusorians() / (double)(CELLS_COUNT * CELLS_COUNT) * 100 + "%\n");
         }
+
+        private bool isColonyCompound(RedCell red)
+        {
+            bool flag = false;
+            foreach (Cell neighbor in red.neighbors)
+            {
+                if (neighbor != null && neighbor.State == 1 && neighbor.GetType() == typeof(RedCell) && !red.colony.Equals(((RedCell)neighbor).colony))
+                {
+                    foreach (var cell in ((RedCell)neighbor).colony)
+                    {
+                        red.colony.AddCell(cell);
+                        ////RedCell new_cell = new RedCell(cell.Y, cell.X, red.colony);
+                        ////setCellNeighbors(new_cell);
+                        //UpdateNeighbors(new_cell);
+                        ////this.terrain[new_cell.Y, new_cell.X] = new_cell;                       
+                    }
+                    flag = true;
+                }
+            }
+            return flag;
+        }
+
+        
+        private void MovingColonies()
+        {
+            //1 - right
+            //2 - bottom
+            //3 - left
+            //4 - top
+            foreach (ColonyOfCells colony in movingColonies)
+            {
+                ColonyOfCells new_colony = new ColonyOfCells(colony.colonyDirection, CELLS_COUNT);
+                foreach (RedCell cell in colony)
+                {
+                    RedCell red = null;
+                    switch (colony.colonyDirection)
+                    {
+                        case 1:
+                            red = new RedCell(cell.Y, cell.X + 1, new_colony);
+                            break;
+                        case 2:
+                            red = new RedCell(cell.Y + 1, cell.X, new_colony);
+                            break;
+                        case 3:
+                            red = new RedCell(cell.Y, cell.X - 1, new_colony);
+                            break;
+                        case 4:
+                            red = new RedCell(cell.Y - 1, cell.X, new_colony);
+                            break;
+                    }
+
+                    setCellNeighbors(red);                    
+                    this.terrain[red.Y, red.X] = red;
+                    UpdateNeighbors(terrain[red.Y, red.X]);
+                }
+                foreach (RedCell cell in new_colony)
+                {
+                    if (cell.isAction() == 0)
+                    {
+                        Cell new_cell = new WhiteCell(cell.Y, cell.X);
+                        setCellNeighbors(new_cell);
+                        terrain[cell.Y, cell.X] = new_cell;
+                        UpdateNeighbors(terrain[cell.Y, cell.X]);
+                    }
+                }
+            }
+            movingColonies = new List<ColonyOfCells>();
+        }
+
+        private void MashingRedCells(ColonyOfCells colony)
+        {
+            foreach (RedCell cell in colony)
+            {
+                Cell new_cell = new WhiteCell(cell.Y, cell.X);
+                setCellNeighbors(new_cell);
+                terrain[cell.Y, cell.X] = new_cell;
+                UpdateNeighbors(terrain[cell.Y, cell.X]);
+            }
+        }
+
+        private void SetRandomDirection(RedCell red)
+        {
+            int rand = r.Next(1, 5);
+            while (rand == red.colony.colonyDirection)
+            {
+                rand = r.Next(1, 5);
+            }
+            red.colony.colonyDirection = rand;
+        }
+
+        
+
+        private void swapSide(ref Cell cell)
+        {
+            if (cell.GetType() == typeof(WhiteCell))
+            {
+                cell = new RedCell(cell.Y, cell.X, cell.getColonyOfRedNeighbor());
+            }
+            else
+            {
+                cell = new WhiteCell(cell.Y, cell.X);
+            }
+
+            setCellNeighbors(cell);
+            UpdateNeighbors(cell);
+        }
+
 
         private int numberOfInfusorians()
         {
@@ -105,42 +252,7 @@ namespace Game_of_Life
             {
                 for (int j = 0; j < CELLS_COUNT; j++)
                 {
-                    if (i == 0 && j == 0)
-                    {
-                        terrain[i, j].setNeighbors(null, null, null, null, null, terrain[i, j + 1], null, terrain[i + 1, j], terrain[i + 1, j + 1]);
-                    }
-                    else if (i == 0 && j == CELLS_COUNT - 1)
-                    {
-                        terrain[i, j].setNeighbors(null, null, null, terrain[i, j-1], null, null, terrain[i+1, j-1], terrain[i + 1, j], null);
-                    }
-                    else if (i == CELLS_COUNT - 1 && j == 0)
-                    {
-                        terrain[i, j].setNeighbors(null, terrain[i-1, j], terrain[i-1, j+1], null, null, terrain[i, j + 1], null, null, null);
-                    }
-                    else if (i == CELLS_COUNT - 1 && j == CELLS_COUNT - 1)
-                    {
-                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], null, terrain[i, j-1], null, null, null, null, null);
-                    }
-                    else if (i == 0)
-                    {
-                        terrain[i, j].setNeighbors(null, null, null, terrain[i, j-1], null, terrain[i, j + 1], terrain[i+1, j-1], terrain[i+1, j], terrain[i+1, j+1]);
-                    }
-                    else if (i == CELLS_COUNT - 1)
-                    {
-                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], terrain[i - 1, j + 1], terrain[i, j-1], null, terrain[i, j + 1], null, null, null);
-                    }
-                    else if (j == 0)
-                    {
-                        terrain[i, j].setNeighbors(null, terrain[i - 1, j], terrain[i - 1, j + 1], null, null, terrain[i, j + 1], null, terrain[i+1, j], terrain[i+1, j+1]);
-                    }
-                    else if (j == CELLS_COUNT -1)
-                    {
-                        terrain[i, j].setNeighbors(terrain[i-1, j-1], terrain[i - 1, j], null, terrain[i, j-1], null, null, terrain[i+1, j-1], terrain[i+1, j], null);
-                    }
-                    else
-                    {
-                        terrain[i, j].setNeighbors(terrain[i - 1, j - 1], terrain[i - 1, j], terrain[i-1, j+1], terrain[i, j - 1], null, terrain[i, j+1], terrain[i + 1, j - 1], terrain[i + 1, j], terrain[i+1, j+1]);
-                    }
+                    setCellNeighbors(terrain[i, j]);
                 }
             }
         }

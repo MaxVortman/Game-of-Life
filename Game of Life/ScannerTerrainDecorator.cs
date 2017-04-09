@@ -11,6 +11,7 @@ namespace Game_of_Life
 {
     class ScannerTerrainDecorator : TerrainDecorator
     {
+        Random r = new Random();
         private int[,] ExtendedTerr;
 
         public ScannerTerrainDecorator(Terrain terr) : base(terr)
@@ -23,7 +24,7 @@ namespace Game_of_Life
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            //удаление не паттернов
+            
             StartScan();
             stopwatch.Stop();
             setStatistics("Время сканирования: " + Convert.ToString(stopwatch.Elapsed) + "\n");
@@ -79,12 +80,22 @@ namespace Game_of_Life
         }
 
         private void FormationOfTraitors(Pattern pattern, int x, int y)
-        {
-            for (int i = 0; i < pattern.currentHeight; i++)
+        {            
+            ColonyOfCells colony = new ColonyOfCells(r.Next(1, 5), CELLS_COUNT);        
+            for (int i = 0; i < pattern.height; i++)
             {
-                for (int j = 0; j < pattern.currentWidth; j++)
+                for (int j = 0; j < pattern.width; j++)
                 {
-                    terrain[y + i, x + j] = new RedCell(y + i, x + j);
+                    if (pattern.mas[i,j] == 1)
+                    {
+                        
+                        Cell cell = new RedCell(y + i-2, x + j-2, colony);
+                        setCellNeighbors(cell);
+                        UpdateNeighbors(cell);
+                        this.terrain[y + i-2, x + j-2] = cell;
+                      //  colony.AddCell(cell);
+                    }
+                   
                 }
             }
         }
@@ -97,7 +108,7 @@ namespace Game_of_Life
             {
                 for (int j = 0; j < CELLS_COUNT + 4; j++)
                 {
-                    if (i < 2 || i > CELLS_COUNT + 1 || j < 2 || j > CELLS_COUNT + 1)
+                    if (i < 2 || i > CELLS_COUNT + 1 || j < 2 || j > CELLS_COUNT + 1 || terr[i-2, j-2] is RedCell)
                     {
                         forWhat[i, j] = 0;
                     }

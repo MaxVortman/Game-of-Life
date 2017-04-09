@@ -14,6 +14,8 @@ namespace Game_of_Life
             color = Brushes.White;
         }
 
+        
+
         //{ new Cell(), new Cell(), new Cell() },
         //{ new Cell(), null, new Cell() },
         //{ new Cell(), new Cell(), new Cell()}
@@ -36,6 +38,5 @@ namespace Game_of_Life
             return act;
         }
 
-       
     }
 }
